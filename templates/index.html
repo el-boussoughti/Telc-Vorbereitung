@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/fav.png" sizes="any">
+    <title>Telc Vorbereitung</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500&display=swap');
+
+        :root {
+            color-scheme: dark;
+            --bg: #03040a;
+            --panel: rgba(255, 255, 255, 0.02);
+            --panel-float: rgba(255, 255, 255, 0.03);
+            --border-muted: rgba(255, 255, 255, 0.2);
+            --panel-border: rgba(255, 255, 255, 0.12);
+            --text-muted: rgba(255, 255, 255, 0.65);
+            --text-strong: #ffffff;
+            --accent: #8cceff;
+            --accent-strong: #5ab3ff;
+            --ring: rgba(138, 206, 255, 0.35);
+            --shadow-soft: 0 20px 45px rgba(3, 5, 18, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', 'Space Grotesk', system-ui, sans-serif;
+            min-height: 100vh;
+            background: radial-gradient(circle at top, rgba(138, 206, 255, 0.16), transparent 55%), linear-gradient(180deg, #03040a, #050610 60%, #070a14 100%);
+            color: var(--text-strong);
+            display: flex;
+            justify-content: center;
+            padding: 32px 16px;
+        }
+
+        .page-shell {
+            width: min(1200px, 100%);
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        header.hero {
+            background: rgba(20, 26, 40, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px;
+            padding: clamp(28px, 3vw, 40px);
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 25% 20%, rgba(138, 206, 255, 0.22), transparent 55%);
+            pointer-events: none;
+        }
+
+        header.hero .hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        header.hero h1 {
+            font-size: clamp(2.4rem, 4vw, 3.3rem);
+            line-height: 1.2;
+        }
+
+        header.hero p {
+            color: var(--text-muted);
+            max-width: 720px;
+            line-height: 1.5;
+        }
+
+        .pill-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        .pill {
+            padding: 6px 16px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .language-switcher {
+            margin-top: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .language-switcher span {
+            font-size: 0.8rem;
+            letter-spacing: 0.3em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .language-buttons {
+            display: inline-flex;
+            gap: 8px;
+        }
+
+        .lang-btn {
+            padding: 6px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.9);
+            color: white;
+        }
+
+        .workspace {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+            gap: 28px;
+            align-items: start;
+        }
+
+        .panel {
+            background: var(--panel);
+            border-radius: 28px;
+            border: 1px solid var(--panel-border);
+            padding: 28px;
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(18px);
+        }
+
+        .panel.settings-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .panel-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .panel-heading h2 {
+            font-size: 1.6rem;
+        }
+
+        .eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-muted);
+            font-size: 0.85rem;
+        }
+
+        .word-form .form-group {
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .word-form label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .word-form input[type="text"],
+        .word-form select,
+        .word-form textarea {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-muted);
+            border-radius: 16px;
+            padding: 12px 16px;
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .word-form input[type="text"]:focus,
+        .word-form textarea:focus,
+        .word-form select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(138, 206, 255, 0.35);
+            outline: none;
+        }
+
+        .word-form textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        button.btn {
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 12px 18px;
+            background: transparent;
+            color: var(--text-strong);
+            transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        }
+
+        button.primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+            border-color: transparent;
+            color: #03040a;
+            box-shadow: 0 12px 25px rgba(5, 9, 20, 0.45);
+        }
+
+        button.primary:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        button.primary:not(:disabled):hover {
+            transform: translateY(-1px);
+        }
+
+        button.ghost {
+            background: transparent;
+            color: var(--text-muted);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        button.ghost:hover {
+            border-color: var(--accent);
+            color: var(--text-strong);
+        }
+
+        button.hidden {
+            display: none;
+        }
+
+        .status-message {
+            margin-top: 18px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            border: 1px solid transparent;
+            font-weight: 500;
+            display: none;
+        }
+
+        .status-message.show {
+            display: block;
+        }
+
+        .status-message.success {
+            background: rgba(34, 197, 94, 0.12);
+            border-color: rgba(34, 197, 94, 0.4);
+            color: #bbf7d0;
+        }
+
+        .status-message.error {
+            background: rgba(248, 113, 113, 0.12);
+            border-color: rgba(248, 113, 113, 0.4);
+            color: #fecaca;
+        }
+
+        .search-result {
+            margin-top: 16px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .search-result.show {
+            display: block;
+        }
+
+        .search-result.exists {
+            border-color: rgba(248, 113, 113, 0.6);
+            background: rgba(248, 113, 113, 0.1);
+        }
+
+        .search-result.not-exists {
+            border-color: rgba(34, 197, 94, 0.6);
+            background: rgba(34, 197, 94, 0.08);
+        }
+
+        .list-toolbar {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .filter-panel {
+            border-radius: 24px;
+            border: 1px solid var(--panel-border);
+            background: var(--panel-float);
+            padding: 18px;
+            display: grid;
+            gap: 14px;
+        }
+
+        .filter-panel .panel-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .filter-panel .panel-head h3 {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .filter-panel .filter-controls {
+            display: grid;
+            gap: 12px;
+        }
+
+        .module-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .filter-pair {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-pair label {
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .filter-pair select {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-muted);
+            border-radius: 14px;
+            color: white;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            min-width: 150px;
+        }
+
+        .filter-pair--teil {
+            flex: 1;
+        }
+
+        .panel-toggle {
+            padding: 8px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(2, 6, 18, 0.45);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            align-self: flex-start;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .panel-toggle-icon {
+            font-size: 1rem;
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, background 0.2s ease;
+        }
+
+        .panel-toggle-icon[data-state='closed'] {
+            transform: rotate(180deg);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .panel-toggle:hover {
+            transform: translateY(-1px);
+            border-color: rgba(14, 165, 233, 0.6);
+        }
+
+        .filter-panel .filter-controls.hidden-panel {
+            display: none;
+        }
+
+        .scope-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .scope-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .export-toggle {
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .export-panel {
+            border-radius: 24px;
+            border: 1px solid var(--panel-border);
+            background: var(--panel-float);
+            padding: 18px;
+            display: grid;
+            gap: 14px;
+        }
+
+        .export-panel .panel-head {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .export-panel .export-title {
+            font-size: 0.85rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .export-panel .export-note {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .export-controls {
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(2, 6, 18, 0.3);
+            padding: 14px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .export-controls.hidden-panel {
+            display: none;
+        }
+
+        .export-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .export-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .export-row label {
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .export-row select {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-muted);
+            border-radius: 12px;
+            color: white;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+        }
+
+        .export-btn {
+            margin-top: 12px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        #filterInput {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-muted);
+            border-radius: 16px;
+            color: white;
+            padding: 12px 16px;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+
+        #filterInput:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(138, 206, 255, 0.2);
+        }
+
+        .card-shell {
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(4, 6, 14, 0.7);
+            padding: 18px;
+            box-shadow: inset 0 1px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .word-counts {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .count-card {
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 1px solid var(--border-muted);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .count-card span {
+            font-size: 1.9rem;
+            font-weight: 600;
+        }
+
+        .count-card small {
+            color: var(--text-muted);
+        }
+
+        .cards-toolbar {
+            margin-top: 18px;
+            width: 100%;
+        }
+
+        .cards-toolbar input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            border: 1px solid var(--border-muted);
+            background: rgba(255, 255, 255, 0.02);
+            color: white;
+            font-size: 0.95rem;
+        }
+
+        .cards-toolbar input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(138, 206, 255, 0.2);
+        }
+
+        .cards-area {
+            margin-top: 16px;
+            padding-right: 12px;
+        }
+
+        .word-card-wrapper {
+            max-height: 540px;
+            overflow-y: auto;
+        }
+
+        .word-card-wrapper::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .word-card-wrapper::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 999px;
+        }
+
+        .words-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+            padding: 8px 0;
+        }
+
+        .word-card {
+            padding: 20px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--panel-border);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 230px;
+            transition: transform 0.25s ease;
+        }
+
+        .word-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+        }
+
+        .word-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .word-title-block {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1 1 260px;
+            min-width: 0;
+        }
+
+        .word-text {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--accent);
+            word-break: break-word;
+            line-height: 1.3;
+        }
+
+        .word-source {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.85);
+            word-break: break-word;
+        }
+
+        .word-sentence {
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .word-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .word-theme {
+            align-self: flex-start;
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            background: rgba(14, 165, 233, 0.2);
+            border: 1px solid rgba(14, 165, 233, 0.35);
+        }
+
+        .word-detail-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .detail-pill {
+            padding: 5px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .word-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .word-actions button {
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            color: var(--text-muted);
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .word-actions button.danger {
+            border-color: rgba(248, 113, 113, 0.6);
+            color: #fee2e2;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px 12px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 1024px) {
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 24px 12px;
+            }
+
+            .panel-heading {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .word-counts {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <header class="hero">
+            <div class="hero-content">
+                <p class="eyebrow" data-l10n="heroLabel">Telc preparation</p>
+                <h1 data-l10n="heroTitle">Curate, edit, and delete words with intention</h1>
+                <p data-l10n="heroDescription">Track meaningful vocabulary with complete sentences and themed categories. The UI reacts as you type, keeps the library refreshed, and now lets you fine-tune or remove entries on demand.</p>
+                <div class="pill-row">
+                    <span class="pill" data-l10n="pill1">Live validation</span>
+                    <span class="pill" data-l10n="pill2">Optimized for storytelling</span>
+                    <span class="pill" data-l10n="pill3">Save, edit, delete</span>
+                </div>
+                <div class="language-switcher">
+                    <span data-l10n="languageLabel">Language</span>
+                    <div class="language-buttons">
+                        <button type="button" class="lang-btn" data-lang-toggle="en">English</button>
+                        <button type="button" class="lang-btn" data-lang-toggle="de">Deutsch</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="workspace">
+            <article class="panel form-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow" data-l10n="formEyebrow">Word Studio</p>
+                        <h2 id="formTitle">Add New Word</h2>
+                    </div>
+                    <span class="badge" id="formModeBadge">Create</span>
+                </div>
+                <form id="wordForm" class="word-form">
+                    <div class="form-group">
+                        <label for="word" data-l10n="wordLabel">Word (unique)</label>
+                        <input type="text" id="word" autocomplete="off" placeholder="Example: luminescent" data-l10n="wordPlaceholder" data-l10n-attr="placeholder">
+                    </div>
+                    <div class="form-group">
+                        <label for="textTitle" data-l10n="textLabel">Text Title</label>
+                        <input type="text" id="textTitle" autocomplete="off" placeholder="E.g. Artikel: Medien &amp; Gesellschaft" data-l10n="textPlaceholder" data-l10n-attr="placeholder">
+                    </div>
+                    <div class="form-group">
+                        <label for="sentence" data-l10n="sentenceLabel">Tell a sentence</label>
+                        <textarea id="sentence" placeholder="Create a sentence that highlights the word." data-l10n="sentencePlaceholder" data-l10n-attr="placeholder"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="theme" data-l10n="themeLabel">Theme / category</label>
+                        <input type="text" id="theme" autocomplete="off" placeholder="Nature, Sci-Fi, Daily Rituals, etc." data-l10n="themePlaceholder" data-l10n-attr="placeholder" list="themeSuggestions">
+                        <datalist id="themeSuggestions"></datalist>
+                    </div>
+                    <div class="form-group">
+                        <label for="module" data-l10n="moduleLabel">Module</label>
+                        <select id="module" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="teil" data-l10n="teilLabel">Teil</label>
+                        <select id="teil" required></select>
+                    </div>
+                    <div class="button-row">
+                        <button type="submit" class="btn primary" id="formSubmitBtn">Add Word</button>
+                        <button type="button" class="btn ghost" id="clearFormBtn" data-l10n="clearFields">Clear fields</button>
+                        <button type="button" class="btn ghost hidden" id="cancelEditBtn">Cancel edit</button>
+                    </div>
+                    <div class="scope-row">
+                        <span class="scope-label" data-l10n="scopeLabel">Uniqueness scope</span>
+                        <button type="button" class="btn ghost panel-toggle scope-toggle" id="scopeToggle" data-l10n="scopeToggleAll">All words</button>
+                    </div>
+                    <div id="statusMessage" class="status-message"></div>
+                    <div id="searchResult" class="search-result"></div>
+                    <div id="textTitleResult" class="search-result"></div>
+                </form>
+            </article>
+
+            <article class="panel settings-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow" data-l10n="settingsEyebrow">Library settings</p>
+                        <h2 data-l10n="settingsTitle">Filters & exports</h2>
+                    </div>
+                </div>
+                    <div class="filter-panel">
+                        <div class="panel-head">
+                            <h3 data-l10n="filterPanelLabel">Filters</h3>
+                            <button type="button" class="btn ghost panel-toggle" id="toggleFilterPanel" aria-expanded="true">
+                                <span class="panel-toggle-label sr-only" data-l10n="filterToggleShow">Show filters</span>
+                                <span aria-hidden="true" class="panel-toggle-icon" data-state="open">⤵</span>
+                            </button>
+                        </div>
+                        <div class="filter-controls">
+                            <div class="module-filters">
+                                <div class="filter-pair">
+                                    <label for="moduleFilter" data-l10n="filterModuleLabel">Module filter</label>
+                                    <select id="moduleFilter"></select>
+                                </div>
+                                <div class="filter-pair filter-pair--teil">
+                                    <label for="teilFilter" data-l10n="filterTeilLabel">Teil filter</label>
+                                    <select id="teilFilter"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="export-panel">
+                        <div class="panel-head">
+                            <p class="export-title" data-l10n="exportTitle">Export table</p>
+                            <button type="button" class="btn ghost panel-toggle" id="toggleExportPanel" aria-expanded="true">
+                                <span class="panel-toggle-label sr-only" data-l10n="exportToggleShow">Toggle export options</span>
+                                <span aria-hidden="true" class="panel-toggle-icon" data-state="open">⤵</span>
+                            </button>
+                        </div>
+                    <span class="export-note" data-l10n="exportNote">Download as table</span>
+                    <div class="export-controls">
+                        <div class="export-grid">
+                            <div class="export-row">
+                                <label for="exportScope" data-l10n="exportScopeLabel">Scope</label>
+                                <select id="exportScope"></select>
+                            </div>
+                            <div class="export-row">
+                                <label for="exportModule" data-l10n="exportModuleExportLabel">Module</label>
+                                <select id="exportModule"></select>
+                            </div>
+                            <div class="export-row">
+                                <label for="exportTeil" data-l10n="exportTeilExportLabel">Teil</label>
+                                <select id="exportTeil"></select>
+                            </div>
+                            <div class="export-row">
+                                <label for="exportFormat" data-l10n="exportFormatLabel">Format</label>
+                                <select id="exportFormat"></select>
+                            </div>
+                        </div>
+                        <button type="button" class="btn primary export-btn" id="exportBtn" data-l10n="exportBtnLabel">Export</button>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section class="cards-area">
+            <article class="panel list-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow" data-l10n="listEyebrow">Word Library</p>
+                        <h2 data-l10n="listTitle">All words</h2>
+                    </div>
+                </div>
+                <div class="card-shell">
+                    <div class="word-counts">
+                        <div class="count-card">
+                            <span id="wordCount">0</span>
+                            <small data-l10n="statsWords">words stored</small>
+                        </div>
+                        <div class="count-card">
+                            <span id="themeCount">0</span>
+                            <small data-l10n="statsThemes">themes tracked</small>
+                        </div>
+                        <div class="count-card">
+                            <span id="lastSynced">—</span>
+                            <small data-l10n="statsSync">last sync</small>
+                        </div>
+                    </div>
+                    <div class="word-card-wrapper">
+                        <div id="wordsList" class="words-grid">
+                            <div class="empty-state">
+                                <p>Loading your vocabulary vault...</p>
+                                <p>Come back soon to build the list.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cards-toolbar">
+                        <label class="sr-only" for="filterInput" data-l10n="filterLabel">Filter words</label>
+                        <input id="filterInput" type="search" placeholder="Filter by word, sentence, or theme" data-l10n="filterPlaceholder" data-l10n-attr="placeholder">
+                    </div>
+                </div>
+            </article>
+        </section>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                heroLabel: 'Telc preparation',
+                heroTitle: 'Telc Text Extraction Studio',
+                heroDescription: 'Capture one unique keyword per reading, anchor it in a sentence, and tag the text’s theme before moving to the next passage.',
+                pill1: 'Telc text coverage',
+                pill2: 'Consistency across readings',
+                pill3: 'Trusted review flow',
+                languageLabel: 'Language',
+                formEyebrow: 'Word Studio',
+                formTitleAdd: 'Add New Word',
+                formTitleEdit: 'Edit word',
+                formModeCreate: 'Create',
+                formModeEdit: 'Edit mode',
+                formSubmitAdd: 'Add Word',
+                formSubmitEdit: 'Save changes',
+                formCancel: 'Cancel edit',
+                wordLabel: 'Word (unique in the text)',
+                textLabel: 'Text title',
+                sentenceLabel: 'Notes',
+                themeLabel: 'Theme / category',
+                moduleLabel: 'Module',
+                modulePlaceholder: 'Select module',
+                teilLabel: 'Teil',
+                teilPlaceholder: 'Select part',
+                wordPlaceholder: 'Example: beleuchten',
+                textPlaceholder: 'Title, chapter, or article name',
+                sentencePlaceholder: 'Quote a sentence that highlights the word.',
+                sentenceDefaultText: 'lbedya dyal text',
+                themePlaceholder: 'e.g. Alltag, Beruf, Medien',
+                listEyebrow: 'Word Library',
+                listTitle: 'All words',
+                filterLabel: 'Filter words',
+                filterPlaceholder: 'Filter by word, sentence, theme, or text',
+                filterModuleLabel: 'Module filter',
+                filterTeilLabel: 'Teil filter',
+                filterAllModules: 'All modules',
+                filterAllTeils: 'All parts',
+                settingsEyebrow: 'Library settings',
+                settingsTitle: 'Filters & exports',
+                statsWords: 'words stored',
+                statsThemes: 'themes tracked',
+                statsSync: 'last sync',
+                emptyLibrary: 'Add a unique word per Telc text to keep your corpus growing.',
+                emptyFilter: 'No words match that filter. Broaden the search criteria to unlock more texts.',
+                emptyLoadFail: 'Unable to load words right now.',
+                searchFound: '<strong>{word}</strong> already tied to "{text}".<br>Sentence: {sentence}<br>Theme: {theme}',
+                searchAvailable: '"{word}" is available for this text.',
+                searchEditingSame: 'You are editing this entry, so the name stays valid.',
+                statusFillAll: 'Please fill out every field.',
+                statusWordExists: 'This word already exists.',
+                statusTextExists: 'This text title already has a word.',
+                statusAdded: 'Word added to the text pool.',
+                statusUpdated: 'Word updated successfully.',
+                statusDeleted: 'Word deleted from the library.',
+                statusDeleteFail: 'Unable to delete the word.',
+                statusError: 'Something went wrong. Try again.',
+                statusSelectModuleTeil: 'Please choose a module and a Teil.',
+                exportTitle: 'Export table',
+                exportScopeLabel: 'Scope',
+                exportScopeAll: 'All entries',
+                exportScopeModule: 'Module',
+                exportScopeModuleTeil: 'Module and Teil',
+                exportModuleExportLabel: 'Module',
+                exportTeilExportLabel: 'Teil',
+                exportFormatLabel: 'File format',
+                exportFormatWord: 'Word (.doc)',
+                exportFormatExcel: 'Excel (.xls)',
+                exportFormatTxt: 'Plain text (.txt)',
+                exportBtnLabel: 'Export table',
+                exportToggleShow: 'Show export options',
+                exportToggleHide: 'Hide export options',
+                filterPanelLabel: 'Filters',
+                filterToggleShow: 'Show filters',
+                filterToggleHide: 'Hide filters',
+                exportNote: 'Download as table',
+                statusExportSuccess: 'Export is ready—check your downloads.',
+                statusSelectExportScope: 'Select module (and Teil) before exporting that scope.',
+                confirmDelete: 'Delete “{word}” permanently?',
+                actionEdit: 'Edit',
+                actionDelete: 'Delete',
+                cardTextLabel: 'Title',
+                moduleOptionLeseverstehen: 'Leseverstehen',
+                moduleOptionSprachbausteine: 'Sprachbausteine',
+                moduleOptionHoren: 'Hören',
+                moduleOptionSchreiben: 'Schreiben',
+                moduleOptionSprechen: 'Sprechen',
+                teilOption1: 'Teil 1',
+                teilOption2: 'Teil 2',
+                teilOption3: 'Teil 3',
+                textTitleUsed: '"{text}" already mapped to {word}.',
+                textTitleAvailable: '"{text}" is ready to describe this passage.',
+                detailModuleLabel: 'Module: {module}',
+                detailTeilLabel: 'Teil: {teil}',
+                scopeLabel: 'Uniqueness scope',
+                scopeToggleAll: 'All words',
+                scopeToggleModuleTeil: 'By Module and Teil'
+                ,clearFields: 'Clear fields'
+            },
+            de: {
+                heroLabel: 'Telc Vorbereitung',
+                heroTitle: 'Telc Text-Extraktion Studio',
+                heroDescription: 'Finde aus jedem Text ein einzigartiges Wort, notiere den Satz und die Themen-Kategorie, bevor du zum nächsten Text wechselst.',
+                pill1: 'Telc-Textabdeckung',
+                pill2: 'Konsistenz über Texte',
+                pill3: 'Verlässlicher Review-Flow',
+                languageLabel: 'Sprache',
+                formEyebrow: 'Wort Studio',
+                formTitleAdd: 'Neues Wort hinzufügen',
+                formTitleEdit: 'Wort bearbeiten',
+                formModeCreate: 'Erstellen',
+                formModeEdit: 'Bearbeitung',
+                formSubmitAdd: 'Wort hinzufügen',
+                formSubmitEdit: 'Änderungen speichern',
+                formCancel: 'Bearbeitung abbrechen',
+                wordLabel: 'Wort (einzigartig im Text)',
+                textLabel: 'Texttitel',
+                sentenceLabel: 'Notizen',
+                themeLabel: 'Thema / Kategorie',
+                moduleLabel: 'Modul',
+                modulePlaceholder: 'Modul wählen',
+                teilLabel: 'Teil',
+                teilPlaceholder: 'Teil wählen',
+                wordPlaceholder: 'Beispiel: beleuchten',
+                textPlaceholder: 'Titel, Kapitel oder Abschnitt',
+                sentencePlaceholder: 'Notiere einen Satz, der das Wort zeigt.',
+                sentenceDefaultText: 'lbedya dyal text',
+                themePlaceholder: 'z. B. Alltag, Beruf, Medien',
+                listEyebrow: 'Wort-Library',
+                listTitle: 'Alle Wörter',
+                filterLabel: 'Wörter filtern',
+                filterPlaceholder: 'Nach Wort, Satz, Thema oder Text filtern',
+                filterModuleLabel: 'Modul-Filter',
+                filterTeilLabel: 'Teil-Filter',
+                filterAllModules: 'Alle Module',
+                filterAllTeils: 'Alle Teile',
+                settingsEyebrow: 'Bibliothekseinstellungen',
+                settingsTitle: 'Filter & Exporte',
+                statsWords: 'Wörter gespeichert',
+                statsThemes: 'Themen verfolgt',
+                statsSync: 'letzter Sync',
+                emptyLibrary: 'Füge zu jedem Telc-Text ein einzigartiges Wort hinzu.',
+                emptyFilter: 'Keine Einträge passen zum Filter. Erweitere die Suche.',
+                emptyLoadFail: 'Wörter können derzeit nicht geladen werden.',
+                searchFound: '<strong>{word}</strong> ist bereits mit "{text}" verbunden.<br>Satz: {sentence}<br>Thema: {theme}',
+                searchAvailable: '"{word}" ist für diesen Text verfügbar.',
+                searchEditingSame: 'Du bearbeitest diesen Eintrag; der Name bleibt gültig.',
+                statusFillAll: 'Bitte fülle alle Felder aus.',
+                statusWordExists: 'Dieses Wort existiert bereits.',
+                statusTextExists: 'Für diesen Text wurde bereits ein Wort gespeichert.',
+                statusAdded: 'Wort wurde zur Liste hinzugefügt.',
+                statusUpdated: 'Wort erfolgreich aktualisiert.',
+                statusDeleted: 'Wort aus der Liste entfernt.',
+                statusDeleteFail: 'Löschen des Worts fehlgeschlagen.',
+                statusError: 'Etwas ist schiefgelaufen. Bitte erneut versuchen.',
+                statusSelectModuleTeil: 'Bitte wähle Modul und Teil aus.',
+                exportTitle: 'Tabelle exportieren',
+                exportScopeLabel: 'Bereich',
+                exportScopeAll: 'Alle Einträge',
+                exportScopeModule: 'Modul',
+                exportScopeModuleTeil: 'Modul und Teil',
+                exportModuleExportLabel: 'Modul',
+                exportTeilExportLabel: 'Teil',
+                exportFormatLabel: 'Dateiformat',
+                exportFormatWord: 'Word (.doc)',
+                exportFormatExcel: 'Excel (.xls)',
+                exportFormatTxt: 'Text (.txt)',
+                exportBtnLabel: 'Export starten',
+                exportToggleShow: 'Exportoptionen zeigen',
+                exportToggleHide: 'Exportoptionen verbergen',
+                filterPanelLabel: 'Filter',
+                filterToggleShow: 'Filter zeigen',
+                filterToggleHide: 'Filter verbergen',
+                exportNote: 'Als Tabelle speichern',
+                statusExportSuccess: 'Export gestartet – im Download-Ordner nachsehen.',
+                statusSelectExportScope: 'Bitte Modul (und Teil) auswählen, bevor du exportierst.',
+                confirmDelete: '„{word}“ endgültig löschen?',
+                actionEdit: 'Bearbeiten',
+                actionDelete: 'Löschen',
+                cardTextLabel: 'Titel',
+                moduleOptionLeseverstehen: 'Leseverstehen',
+                moduleOptionSprachbausteine: 'Sprachbausteine',
+                moduleOptionHoren: 'Hören',
+                moduleOptionSchreiben: 'Schreiben',
+                moduleOptionSprechen: 'Sprechen',
+                teilOption1: 'Teil 1',
+                teilOption2: 'Teil 2',
+                teilOption3: 'Teil 3',
+                textTitleUsed: '„{text}“ ist bereits mit {word} verbunden.',
+                textTitleAvailable: '„{text}“ kann für diesen Text verwendet werden.',
+                detailModuleLabel: 'Modul: {module}',
+                detailTeilLabel: 'Teil: {teil}',
+                scopeLabel: 'Geltungsbereich',
+                scopeToggleAll: 'Alle Wörter',
+                scopeToggleModuleTeil: 'Nach Modul und Teil'
+                ,clearFields: 'Felder leeren'
+            }
+        };
+
+        const MODULE_OPTIONS = [
+            { id: 'leseverstehen', labelKey: 'moduleOptionLeseverstehen' },
+            { id: 'sprachbausteine', labelKey: 'moduleOptionSprachbausteine' },
+            { id: 'hören', labelKey: 'moduleOptionHoren' },
+            { id: 'schreiben', labelKey: 'moduleOptionSchreiben' },
+            { id: 'sprechen', labelKey: 'moduleOptionSprechen' }
+        ];
+
+        const TEIL_OPTIONS = [
+            { id: 'teil1', labelKey: 'teilOption1' },
+            { id: 'teil2', labelKey: 'teilOption2' },
+            { id: 'teil3', labelKey: 'teilOption3' }
+        ];
+
+        const MODULE_LABEL_MAP = MODULE_OPTIONS.reduce((acc, option) => {
+            acc[option.id] = option.labelKey;
+            return acc;
+        }, {});
+
+        const TEIL_LABEL_MAP = TEIL_OPTIONS.reduce((acc, option) => {
+            acc[option.id] = option.labelKey;
+            return acc;
+        }, {});
+
+        const EXPORT_SCOPE_OPTIONS = [
+            { id: 'all', labelKey: 'exportScopeAll' },
+            { id: 'module', labelKey: 'exportScopeModule' },
+            { id: 'module+teil', labelKey: 'exportScopeModuleTeil' }
+        ];
+
+        const EXPORT_FORMAT_OPTIONS = [
+            { id: 'word', labelKey: 'exportFormatWord', extension: 'doc' },
+            { id: 'excel', labelKey: 'exportFormatExcel', extension: 'xls' },
+            { id: 'txt', labelKey: 'exportFormatTxt', extension: 'txt' }
+        ];
+
+        const EXPORT_FORMAT_META = EXPORT_FORMAT_OPTIONS.reduce((acc, option) => {
+            acc[option.id] = option;
+            return acc;
+        }, {});
+
+        const API_URL = window.location.origin + '/api';
+
+        const wordInput = document.getElementById('word');
+        const sentenceInput = document.getElementById('sentence');
+        const themeInput = document.getElementById('theme');
+        const textTitleInput = document.getElementById('textTitle');
+        const moduleSelect = document.getElementById('module');
+        const teilSelect = document.getElementById('teil');
+        const moduleFilter = document.getElementById('moduleFilter');
+        const teilFilter = document.getElementById('teilFilter');
+        const formSubmitBtn = document.getElementById('formSubmitBtn');
+        const wordForm = document.getElementById('wordForm');
+        const searchResult = document.getElementById('searchResult');
+        const textTitleResult = document.getElementById('textTitleResult');
+        const statusMessage = document.getElementById('statusMessage');
+        const wordsList = document.getElementById('wordsList');
+        const themeSuggestionsList = document.getElementById('themeSuggestions');
+        const filterInput = document.getElementById('filterInput');
+        const formTitle = document.getElementById('formTitle');
+        const formModeBadge = document.getElementById('formModeBadge');
+        const cancelEditBtn = document.getElementById('cancelEditBtn');
+        const wordCount = document.getElementById('wordCount');
+        const themeCount = document.getElementById('themeCount');
+        const lastSynced = document.getElementById('lastSynced');
+        const languageButtons = document.querySelectorAll('[data-lang-toggle]');
+        const scopeToggleBtn = document.getElementById('scopeToggle');
+        const filterControls = document.querySelector('.filter-controls');
+        const filterToggleBtn = document.getElementById('toggleFilterPanel');
+        const filterToggleLabel = filterToggleBtn?.querySelector('.panel-toggle-label');
+        const filterToggleIcon = filterToggleBtn?.querySelector('.panel-toggle-icon');
+        const exportPanel = document.querySelector('.export-panel');
+        const exportToggleBtn = document.getElementById('toggleExportPanel');
+        const exportControls = document.querySelector('.export-controls');
+        const exportScopeSelect = document.getElementById('exportScope');
+        const exportModuleSelect = document.getElementById('exportModule');
+        const exportTeilSelect = document.getElementById('exportTeil');
+        const exportFormatSelect = document.getElementById('exportFormat');
+        const exportBtn = document.getElementById('exportBtn');
+        const clearFormBtn = document.getElementById('clearFormBtn');
+        const exportToggleLabel = exportToggleBtn?.querySelector('.panel-toggle-label');
+        const exportToggleIcon = exportToggleBtn?.querySelector('.panel-toggle-icon');
+
+        let allWords = [];
+        let wordExists = false;
+        let textTitleExists = false;
+        let themeSuggestions = [];
+        let editMode = false;
+        let editWordId = null;
+        let uniquenessScope = 'all';
+        let sentenceDefaultApplied = false;
+        let sentenceTouched = false;
+        let currentLang = 'en';
+        const defaultLang = 'en';
+
+        function t(key, vars = {}) {
+            const source = translations[currentLang] && translations[currentLang][key]
+                ? translations[currentLang][key]
+                : translations[defaultLang] && translations[defaultLang][key]
+                    ? translations[defaultLang][key]
+                    : '';
+            return Object.entries(vars).reduce((text, [placeholder, value]) => {
+                return text.replace(new RegExp(`\{${placeholder}\}`, 'g'), value);
+            }, source);
+        }
+
+        function refreshFormText() {
+            formTitle.textContent = editMode ? t('formTitleEdit') : t('formTitleAdd');
+            formModeBadge.textContent = editMode ? t('formModeEdit') : t('formModeCreate');
+            formSubmitBtn.textContent = editMode ? t('formSubmitEdit') : t('formSubmitAdd');
+            cancelEditBtn.textContent = t('formCancel');
+        }
+
+        function resetSentenceField() {
+            sentenceInput.value = '';
+            sentenceDefaultApplied = false;
+            sentenceTouched = false;
+        }
+
+        function populateFormSelect(select, options, placeholderKey) {
+            const previousValue = select.value;
+            const placeholder = `<option value="" disabled>${escapeHtml(t(placeholderKey))}</option>`;
+            const optionsHtml = options
+                .map(option => `<option value="${option.id}">${escapeHtml(t(option.labelKey) || option.id)}</option>`)
+                .join('');
+            select.innerHTML = placeholder + optionsHtml;
+            if (previousValue && options.some(option => option.id === previousValue)) {
+                select.value = previousValue;
+            } else {
+                select.value = '';
+            }
+        }
+
+        function populateFilterSelect(select, options, allKey) {
+            const previousValue = select.value;
+            const optionsHtml = options
+                .map(option => `<option value="${option.id}">${escapeHtml(t(option.labelKey) || option.id)}</option>`)
+                .join('');
+            select.innerHTML = `<option value="all">${escapeHtml(t(allKey))}</option>` + optionsHtml;
+            if (previousValue && (previousValue === 'all' || options.some(option => option.id === previousValue))) {
+                select.value = previousValue;
+            } else {
+                select.value = 'all';
+            }
+        }
+
+        function refreshDropdowns() {
+            populateFormSelect(moduleSelect, MODULE_OPTIONS, 'modulePlaceholder');
+            populateFormSelect(teilSelect, TEIL_OPTIONS, 'teilPlaceholder');
+            populateFilterSelect(moduleFilter, MODULE_OPTIONS, 'filterAllModules');
+            populateFilterSelect(teilFilter, TEIL_OPTIONS, 'filterAllTeils');
+        }
+
+        function populateSimpleSelect(select, options, defaultValue) {
+            const optionsHtml = options
+                .map(option => `<option value="${option.id}">${escapeHtml(t(option.labelKey) || option.id)}</option>`)
+                .join('');
+            select.innerHTML = optionsHtml;
+            select.value = defaultValue || (options[0] ? options[0].id : '');
+        }
+
+        function refreshExportFields() {
+            populateSimpleSelect(exportScopeSelect, EXPORT_SCOPE_OPTIONS, 'all');
+            populateSimpleSelect(exportFormatSelect, EXPORT_FORMAT_OPTIONS, 'word');
+            populateFormSelect(exportModuleSelect, MODULE_OPTIONS, 'modulePlaceholder');
+            populateFormSelect(exportTeilSelect, TEIL_OPTIONS, 'teilPlaceholder');
+            updateExportInputs();
+            setExportToggleLabel();
+        }
+
+        function updateExportInputs() {
+            const scope = exportScopeSelect.value;
+            exportModuleSelect.disabled = scope === 'all';
+            exportTeilSelect.disabled = scope !== 'module+teil';
+        }
+
+        function setFilterToggleLabel() {
+            if (!filterToggleBtn) return;
+            const isHidden = filterControls.classList.contains('hidden-panel');
+            const key = isHidden ? 'filterToggleShow' : 'filterToggleHide';
+            filterToggleLabel?.setAttribute('data-l10n', key);
+            filterToggleLabel && (filterToggleLabel.textContent = t(key));
+            if (filterToggleIcon) {
+                filterToggleIcon.dataset.state = isHidden ? 'closed' : 'open';
+            }
+            filterToggleBtn.setAttribute('aria-expanded', String(!isHidden));
+        }
+
+        function toggleFilterPanelVisibility() {
+            filterControls.classList.toggle('hidden-panel');
+            setFilterToggleLabel();
+        }
+
+        function setExportToggleLabel() {
+            if (!exportToggleBtn || !exportControls) return;
+            const isHidden = exportControls.classList.contains('hidden-panel');
+            const key = isHidden ? 'exportToggleShow' : 'exportToggleHide';
+            exportToggleLabel?.setAttribute('data-l10n', key);
+            exportToggleLabel && (exportToggleLabel.textContent = t(key));
+            if (exportToggleIcon) {
+                exportToggleIcon.dataset.state = isHidden ? 'closed' : 'open';
+            }
+            exportToggleBtn.setAttribute('aria-expanded', String(!isHidden));
+        }
+        function toggleExportPanelVisibility() {
+            if (!exportControls) return;
+            exportControls.classList.toggle('hidden-panel');
+            setExportToggleLabel();
+        }
+
+        async function handleExportClick() {
+            const scope = exportScopeSelect.value;
+            const format = exportFormatSelect.value;
+            const moduleValue = exportModuleSelect.value;
+            const teilValue = exportTeilSelect.value;
+
+            if ((scope === 'module' || scope === 'module+teil') && !moduleValue) {
+                updateStatus(t('statusSelectExportScope'), 'error');
+                return;
+            }
+
+            if (scope === 'module+teil' && !teilValue) {
+                updateStatus(t('statusSelectExportScope'), 'error');
+                return;
+            }
+
+            const params = new URLSearchParams({
+                format,
+                scope
+            });
+
+            if (moduleValue) {
+                params.set('module', moduleValue);
+            }
+
+            if (scope === 'module+teil' && teilValue) {
+                params.set('teil', teilValue);
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/export-words?${params.toString()}`);
+                if (!response.ok) {
+                    const data = await response.json().catch(() => ({}));
+                    const message = data.error || t('statusError');
+                    updateStatus(message, 'error');
+                    return;
+                }
+
+                const blob = await response.blob();
+                const meta = EXPORT_FORMAT_META[format] || { extension: format };
+                const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+                const filenameParts = ['telc-words', scope, timestamp].filter(Boolean);
+                const filename = `${filenameParts.join('-')}.${meta.extension}`;
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                updateStatus(t('statusExportSuccess'), 'success');
+            } catch (error) {
+                console.error('Export failed:', error);
+                updateStatus(t('statusError'), 'error');
+            }
+        }
+
+        function applyLocalization() {
+            document.querySelectorAll('[data-l10n]').forEach(element => {
+                const key = element.dataset.l10n;
+                if (!key) return;
+                const attr = element.dataset.l10nAttr;
+                const text = t(key);
+                if (!text) return;
+                if (attr) {
+                    element.setAttribute(attr, text);
+                } else {
+                    element.textContent = text;
+                }
+            });
+            refreshFormText();
+            refreshDropdowns();
+            refreshExportFields();
+            setFilterToggleLabel();
+            setScopeToggleLabel();
+        }
+
+        function updateLanguageButtons() {
+            languageButtons.forEach(button => {
+                const isActive = button.dataset.langToggle === currentLang;
+                button.classList.toggle('active', isActive);
+                button.setAttribute('aria-pressed', isActive);
+            });
+        }
+
+        function setScopeToggleLabel() {
+            if (!scopeToggleBtn) return;
+            const key = uniquenessScope === 'all' ? 'scopeToggleAll' : 'scopeToggleModuleTeil';
+            scopeToggleBtn.textContent = t(key);
+            scopeToggleBtn.classList.toggle('active', uniquenessScope === 'module+teil');
+        }
+
+        function getScopePayload() {
+            return {
+                scope: uniquenessScope,
+                module: moduleSelect.value,
+                teil: teilSelect.value
+            };
+        }
+
+        function setLanguage(lang) {
+            if (!translations[lang]) return;
+            currentLang = lang;
+            applyLocalization();
+            updateLanguageButtons();
+            renderWordList();
+        }
+
+        function updateStatus(message, type) {
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message show ${type}`;
+            setTimeout(() => {
+                statusMessage.classList.remove('show');
+            }, 3000);
+        }
+
+        function updateFormButtonState() {
+            const shouldDisable = wordExists || textTitleExists;
+            formSubmitBtn.disabled = shouldDisable;
+        }
+
+        function updateHeroStats() {
+            wordCount.textContent = allWords.length;
+            const themes = new Set(allWords.map(word => word.theme.toLowerCase()));
+            themeCount.textContent = themes.size;
+            lastSynced.textContent = new Date().toLocaleTimeString();
+        }
+
+        async function loadWords() {
+            try {
+                const response = await fetch(`${API_URL}/get-all-words`);
+                const words = await response.json();
+                allWords = Array.isArray(words) ? words : [];
+                renderWordList();
+                updateHeroStats();
+            } catch (error) {
+                console.error('Error loading words:', error);
+                wordsList.innerHTML = `<div class="empty-state"><p>${t('emptyLoadFail')}</p></div>`;
+            }
+        }
+
+        function renderWordList() {
+            const query = filterInput.value.trim().toLowerCase();
+            const activeModule = moduleFilter.value;
+            const activeTeil = teilFilter.value;
+
+            const filtered = allWords.filter(word => {
+                const haystack = `${word.word} ${word.sentence} ${word.theme} ${word.text_title}`.toLowerCase();
+                const matchesSearch = haystack.includes(query);
+                const matchesModule = activeModule === 'all' || word.module === activeModule;
+                const matchesTeil = activeTeil === 'all' || word.teil === activeTeil;
+                return matchesSearch && matchesModule && matchesTeil;
+            });
+
+            if (filtered.length === 0) {
+                const isFiltered = query || activeModule !== 'all' || activeTeil !== 'all';
+                const message = allWords.length === 0 ? t('emptyLibrary') : (isFiltered ? t('emptyFilter') : t('emptyLibrary'));
+                wordsList.innerHTML = `<div class="empty-state"><p>${message}</p></div>`;
+                return;
+            }
+
+            wordsList.innerHTML = filtered.map(word => {
+                const moduleLabel = MODULE_LABEL_MAP[word.module]
+                    ? t(MODULE_LABEL_MAP[word.module])
+                    : word.module;
+                const teilLabel = TEIL_LABEL_MAP[word.teil]
+                    ? t(TEIL_LABEL_MAP[word.teil])
+                    : word.teil;
+
+                return `
+                    <article class="word-card" data-id="${word.id}">
+                        <div class="word-card-header">
+                            <div class="word-title-block">
+                                <span class="word-text" title="${escapeHtml(word.word)}">${escapeHtml(word.word)}</span>
+                                <span class="word-source" title="${escapeHtml(word.text_title)}"><strong>${t('cardTextLabel')}:</strong> ${escapeHtml(word.text_title)}</span>
+                            </div>
+                            <div class="word-actions">
+                                <button type="button" data-action="edit" data-id="${word.id}">${t('actionEdit')}</button>
+                                <button type="button" class="danger" data-action="delete" data-id="${word.id}">${t('actionDelete')}</button>
+                            </div>
+                        </div>
+                        <p class="word-sentence">"${escapeHtml(word.sentence)}"</p>
+                        <div class="word-meta">
+                            <span class="word-theme">${escapeHtml(word.theme)}</span>
+                            <div class="word-detail-row">
+                                <span class="detail-pill">${t('detailModuleLabel', { module: escapeHtml(moduleLabel) })}</span>
+                                <span class="detail-pill">${t('detailTeilLabel', { teil: escapeHtml(teilLabel) })}</span>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        function handleWordListClick(event) {
+            const button = event.target.closest('button[data-action]');
+            if (!button) return;
+            const wordId = Number(button.dataset.id);
+            const targetWord = allWords.find(word => word.id === wordId);
+            if (!targetWord) return;
+
+            if (button.dataset.action === 'edit') {
+                enterEditMode(targetWord);
+            }
+
+            if (button.dataset.action === 'delete') {
+                handleDeleteWord(targetWord);
+            }
+        }
+
+        function enterEditMode(word) {
+            editMode = true;
+            editWordId = word.id;
+            wordExists = false;
+            formSubmitBtn.disabled = false;
+            searchResult.classList.remove('show', 'exists', 'not-exists');
+            formTitle.textContent = t('formTitleEdit');
+            formModeBadge.textContent = t('formModeEdit');
+            formSubmitBtn.textContent = t('formSubmitEdit');
+            cancelEditBtn.classList.remove('hidden');
+            wordInput.value = word.word;
+            textTitleInput.value = word.text_title;
+            sentenceInput.value = word.sentence;
+            sentenceDefaultApplied = false;
+            sentenceTouched = true;
+            themeInput.value = word.theme;
+            moduleSelect.value = word.module || '';
+            teilSelect.value = word.teil || '';
+            wordInput.focus();
+            textTitleResult.classList.remove('show');
+            textTitleExists = false;
+            updateFormButtonState();
+        }
+
+        function exitEditMode() {
+            editMode = false;
+            editWordId = null;
+            wordExists = false;
+            wordForm.reset();
+            resetSentenceField();
+            moduleSelect.value = '';
+            teilSelect.value = '';
+            textTitleResult.classList.remove('show');
+            textTitleExists = false;
+            formTitle.textContent = t('formTitleAdd');
+            formModeBadge.textContent = t('formModeCreate');
+            formSubmitBtn.textContent = t('formSubmitAdd');
+            cancelEditBtn.classList.add('hidden');
+            searchResult.classList.remove('show', 'exists', 'not-exists');
+            updateFormButtonState();
+        }
+
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            const payload = {
+                word: wordInput.value.trim(),
+                sentence: sentenceInput.value.trim(),
+                theme: themeInput.value.trim(),
+                text_title: textTitleInput.value.trim()
+            };
+            const selectedModule = moduleSelect.value;
+            const selectedTeil = teilSelect.value;
+
+            if (!payload.word || !payload.sentence || !payload.theme || !payload.text_title) {
+                updateStatus(t('statusFillAll'), 'error');
+                return;
+            }
+
+            if (!selectedModule || !selectedTeil) {
+                updateStatus(t('statusSelectModuleTeil'), 'error');
+                return;
+            }
+
+            payload.module = selectedModule;
+            payload.teil = selectedTeil;
+            payload.scope = uniquenessScope;
+
+            if (textTitleExists && !editMode) {
+                updateStatus(t('statusTextExists'), 'error');
+                return;
+            }
+
+            if (editMode) {
+                await saveEditedWord(payload);
+            } else {
+                if (wordExists) {
+                    updateStatus(t('statusWordExists'), 'error');
+                    return;
+                }
+                await addWord(payload);
+            }
+        }
+
+        async function saveEditedWord(payload) {
+            payload.id = editWordId;
+            if (!payload.id) {
+                updateStatus(t('statusError'), 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/update-word`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    updateStatus(t('statusUpdated'), 'success');
+                    exitEditMode();
+                    loadWords();
+                } else {
+                    const message = data.error === 'Text title already in use'
+                        ? t('statusTextExists')
+                        : (data.error || t('statusError'));
+                    updateStatus(message, 'error');
+                }
+            } catch (error) {
+                console.error('Error editing word:', error);
+                updateStatus(t('statusError'), 'error');
+            }
+        }
+
+        async function addWord(payload) {
+            try {
+                const response = await fetch(`${API_URL}/add-word`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    updateStatus(t('statusAdded'), 'success');
+                    wordForm.reset();
+                    resetSentenceField();
+                    searchResult.classList.remove('show', 'exists', 'not-exists');
+                    textTitleResult.classList.remove('show', 'exists', 'not-exists');
+                    textTitleExists = false;
+                    updateFormButtonState();
+                    loadWords();
+                } else {
+                    const message = data.error === 'Text title already in use'
+                        ? t('statusTextExists')
+                        : (data.error || t('statusError'));
+                    updateStatus(message, 'error');
+                }
+            } catch (error) {
+                console.error('Error adding word:', error);
+                updateStatus(t('statusError'), 'error');
+            }
+        }
+
+        async function handleDeleteWord(word) {
+            const confirmed = window.confirm(t('confirmDelete', { word: word.word }));
+            if (!confirmed) return;
+
+            try {
+                const response = await fetch(`${API_URL}/delete-word/${word.id}`, {
+                    method: 'DELETE'
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    updateStatus(t('statusDeleted'), 'success');
+                    loadWords();
+                } else {
+                    updateStatus(data.error || t('statusDeleteFail'), 'error');
+                }
+            } catch (error) {
+                console.error('Error deleting word:', error);
+                updateStatus(t('statusDeleteFail'), 'error');
+            }
+        }
+
+        async function searchWord() {
+            const value = wordInput.value.trim();
+
+            if (!value) {
+                searchResult.classList.remove('show', 'exists', 'not-exists');
+                formSubmitBtn.disabled = false;
+                wordExists = false;
+                updateFormButtonState();
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/check-word`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                body: JSON.stringify({ word: value, ...getScopePayload() })
+            });
+
+                const data = await response.json();
+
+                if (data.exists) {
+                    const isSameRecord = editMode && data.id === editWordId;
+                    if (isSameRecord) {
+                        wordExists = false;
+                        formSubmitBtn.disabled = false;
+                        searchResult.className = 'search-result show not-exists';
+                        searchResult.textContent = t('searchEditingSame');
+                    } else {
+                        wordExists = true;
+                        formSubmitBtn.disabled = true;
+                        searchResult.className = 'search-result show exists';
+                        searchResult.innerHTML = t('searchFound', {
+                            word: escapeHtml(data.word),
+                            sentence: escapeHtml(data.sentence),
+                            theme: escapeHtml(data.theme),
+                            text: escapeHtml(data.text_title)
+                        });
+                    }
+                } else {
+                    wordExists = false;
+                    formSubmitBtn.disabled = false;
+                    searchResult.className = 'search-result show not-exists';
+                    searchResult.textContent = t('searchAvailable', { word: escapeHtml(value) });
+                }
+            } catch (error) {
+                console.error('Error checking word:', error);
+                searchResult.classList.remove('show');
+                wordExists = false;
+                formSubmitBtn.disabled = false;
+            }
+            updateFormButtonState();
+        }
+
+        async function checkTextTitle() {
+            const title = textTitleInput.value.trim();
+
+            if (!title) {
+                textTitleResult.classList.remove('show', 'exists', 'not-exists');
+                textTitleExists = false;
+                updateFormButtonState();
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/check-text-title`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                body: JSON.stringify({ text_title: title, ...getScopePayload() })
+            });
+
+                const data = await response.json();
+
+                if (data.exists) {
+                    const isSameRecord = editMode && data.id === editWordId;
+                    textTitleExists = !isSameRecord;
+                    if (textTitleExists) {
+                        textTitleResult.className = 'search-result show exists';
+                        textTitleResult.innerHTML = t('textTitleUsed', {
+                            text: escapeHtml(data.text_title),
+                            word: escapeHtml(data.word)
+                        });
+                    } else {
+                        textTitleResult.className = 'search-result show not-exists';
+                        textTitleResult.textContent = t('searchEditingSame');
+                    }
+                } else {
+                    textTitleExists = false;
+                    textTitleResult.className = 'search-result show not-exists';
+                    textTitleResult.textContent = t('textTitleAvailable', {
+                        text: escapeHtml(title)
+                    });
+                }
+            } catch (error) {
+                console.error('Error checking text title:', error);
+                textTitleResult.classList.remove('show', 'exists', 'not-exists');
+                textTitleExists = false;
+            }
+            updateFormButtonState();
+        }
+
+        async function fetchThemeSuggestions(prefix) {
+            const value = (prefix || '').trim();
+            if (!value) {
+                themeSuggestionsList.innerHTML = '';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/themes?q=${encodeURIComponent(value)}`);
+                const suggestions = await response.json();
+                if (Array.isArray(suggestions)) {
+                    themeSuggestionsList.innerHTML = suggestions
+                        .map(theme => `<option value="${escapeHtml(theme)}"></option>`)
+                        .join('');
+                }
+            } catch (error) {
+                console.error('Error fetching theme suggestions:', error);
+            }
+        }
+
+        function debounce(func, delay) {
+            let timeoutId;
+            return function (...args) {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => func(...args), delay);
+            };
+        }
+
+        function escapeHtml(text = '') {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return String(text).replace(/[&<>"']/g, m => map[m]) || '';
+        }
+
+        filterInput.addEventListener('input', renderWordList);
+        moduleFilter.addEventListener('change', renderWordList);
+        teilFilter.addEventListener('change', renderWordList);
+        wordInput.addEventListener('input', debounce(searchWord, 350));
+        textTitleInput.addEventListener('input', debounce(checkTextTitle, 350));
+        themeInput.addEventListener('input', debounce(event => fetchThemeSuggestions(event.target.value), 250));
+        sentenceInput.addEventListener('focus', () => {
+            if (!sentenceTouched && !sentenceDefaultApplied && !sentenceInput.value.trim()) {
+                const defaultText = t('sentenceDefaultText');
+                if (defaultText) {
+                    sentenceInput.value = defaultText;
+                    sentenceDefaultApplied = true;
+                    sentenceInput.setSelectionRange(0, defaultText.length);
+                }
+            }
+        });
+        sentenceInput.addEventListener('input', () => {
+            sentenceTouched = true;
+            const defaultText = t('sentenceDefaultText');
+            if (sentenceDefaultApplied && sentenceInput.value !== defaultText) {
+                sentenceDefaultApplied = false;
+            }
+        });
+        exportScopeSelect.addEventListener('change', updateExportInputs);
+        exportModuleSelect.addEventListener('change', updateExportInputs);
+        exportBtn.addEventListener('click', handleExportClick);
+        if (exportToggleBtn) {
+            exportToggleBtn.addEventListener('click', toggleExportPanelVisibility);
+        }
+        if (filterToggleBtn) {
+            filterToggleBtn.addEventListener('click', toggleFilterPanelVisibility);
+        }
+        const triggerRevalidation = () => {
+            if (wordInput.value.trim()) {
+                searchWord();
+            }
+            if (textTitleInput.value.trim()) {
+                checkTextTitle();
+            }
+        };
+        if (scopeToggleBtn) {
+            scopeToggleBtn.addEventListener('click', () => {
+                const targetScope = uniquenessScope === 'all' ? 'module+teil' : 'all';
+                if (targetScope === 'module+teil' && (!moduleSelect.value || !teilSelect.value)) {
+                    updateStatus(t('statusSelectModuleTeil'), 'error');
+                    return;
+                }
+                uniquenessScope = targetScope;
+                setScopeToggleLabel();
+                triggerRevalidation();
+            });
+        }
+        if (clearFormBtn) {
+            clearFormBtn.addEventListener('click', () => {
+                exitEditMode();
+                uniquenessScope = 'all';
+                setScopeToggleLabel();
+                triggerRevalidation();
+            });
+        }
+        moduleSelect.addEventListener('change', triggerRevalidation);
+        teilSelect.addEventListener('change', triggerRevalidation);
+        wordForm.addEventListener('submit', handleFormSubmit);
+        cancelEditBtn.addEventListener('click', exitEditMode);
+        wordsList.addEventListener('click', handleWordListClick);
+
+        languageButtons.forEach(button => {
+            button.addEventListener('click', () => setLanguage(button.dataset.langToggle));
+        });
+
+        setLanguage(currentLang);
+        window.addEventListener('load', loadWords);
+    </script>
+</body>
+</html>
